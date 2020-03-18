@@ -9,21 +9,24 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.Assert;
 
-import javax.validation.constraints.NotBlank;
-
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Document(collection = "account")
 public class Account {
     @Id
     private String id;
-    @NotBlank
     @Indexed(unique = true)
     private String name;
 
     public Account(String name) {
+        updateName(name);
+    }
+
+    public void updateName(String name) {
         Assert.isTrue(!StringUtils.isBlank(name), "Name must not be emtpy!");
 
-        this.name = name;
+        if (!StringUtils.isBlank(name)) {
+            this.name = name;
+        }
     }
 }

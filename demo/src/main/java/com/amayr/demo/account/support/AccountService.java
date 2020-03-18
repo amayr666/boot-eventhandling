@@ -46,7 +46,7 @@ class AccountService {
         return eventRepository.findEventByAccountId(accountId);
     }
 
-    private Account findAccountOrFail(String accountId) {
+    Account findAccountOrFail(String accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
         if (!account.isPresent()) {
             throw constructArticleNotFoundException(accountId);

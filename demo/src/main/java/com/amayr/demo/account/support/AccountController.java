@@ -33,13 +33,8 @@ public class AccountController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String id, @Valid @RequestBody Account account) {
-        if (!id.equals(account.getId())) {
-            return ResponseEntity.badRequest().body(
-                    String.format("Trying to update '%s' with id '%s' but object for id '%s' is given in the put body",
-                            Account.class.getName(), id, account.getId()));
-        }
-        return ResponseEntity.ok(accountService.update(account));
+    public ResponseEntity<?> update(@PathVariable("id") String id, @Valid @RequestBody UpdateAccountRequest account) {
+        return ResponseEntity.ok(accountService.update(account.toAccount(accountService.findAccountOrFail(id))));
     }
 
     @PostMapping("/{id}/event")
@@ -59,6 +54,17 @@ public class AccountController {
 
         Account toAccount() {
             return new Account(name);
+        }
+    }
+
+    @Data
+    private static class UpdateAccountRequest {
+        @NotBlank
+        private String name;
+
+        Account toAccount(Account original) {
+            original.updateName(name);
+            return original;
         }
     }
 
