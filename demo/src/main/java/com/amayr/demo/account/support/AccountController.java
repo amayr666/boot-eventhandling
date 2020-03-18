@@ -58,9 +58,7 @@ public class AccountController {
         private String name;
 
         Account toAccount() {
-            Account account = new Account();
-            account.setName(name);
-            return account;
+            return new Account(name);
         }
     }
 
