@@ -2,6 +2,7 @@ package com.amayr.demo.account.support;
 
 import com.amayr.demo.account.Account;
 import com.amayr.demo.event.Event;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,7 +55,7 @@ public class AccountController {
     }
 
     @AllArgsConstructor
-    @NoArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @Data
     public static class CreateAccountRequest {
         @NotBlank
@@ -66,7 +67,7 @@ public class AccountController {
     }
 
     @AllArgsConstructor
-    @NoArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @Data
     public static class UpdateAccountRequest {
         @NotBlank
@@ -79,7 +80,7 @@ public class AccountController {
     }
 
     @AllArgsConstructor
-    @NoArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @Data
     public static class CreateEventRequest {
         @NotBlank

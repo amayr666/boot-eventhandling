@@ -1,0 +1,90 @@
+= Endpoints
+
+This lists all available endpoints in the example application.
+
+:toc:
+:toclevels: 4
+
+
+== Find all Accounts
+.request
+include::{snippets}/findAllAccounts/http-request.adoc[]
+
+.response
+include::{snippets}/findAllAccounts/http-response.adoc[]
+
+== Find Account by id
+.request
+include::{snippets}/findAccountById/http-request.adoc[]
+
+include::{snippets}/findAccountById/path-parameters.adoc[]
+
+.response
+include::{snippets}/findAccountById/http-response.adoc[]
+
+== Insert new Account
+.request
+include::{snippets}/insertAccount/http-request.adoc[]
+
+.request fields
+include::{snippets}/insertAccount/request-fields.adoc[]
+
+.response
+include::{snippets}/insertAccount/http-response.adoc[]
+
+.response fields
+include::{snippets}/insertAccount/response-fields.adoc[]
+
+== Update existing Account
+.request
+include::{snippets}/updateAccount/http-request.adoc[]
+
+include::{snippets}/updateAccount/path-parameters.adoc[]
+
+.request fields
+include::{snippets}/updateAccount/request-fields.adoc[]
+
+.response
+include::{snippets}/updateAccount/http-response.adoc[]
+
+.response fields
+include::{snippets}/updateAccount/response-fields.adoc[]
+
+== Insert new Event for Account
+.request
+include::{snippets}/insertEvent/http-request.adoc[]
+
+include::{snippets}/insertEvent/path-parameters.adoc[]
+
+.request fields
+include::{snippets}/insertEvent/request-fields.adoc[]
+
+.response
+include::{snippets}/insertEvent/http-response.adoc[]
+
+.response fields
+include::{snippets}/insertEvent/response-fields.adoc[]
+
+== Find all Events for a given Account
+.request
+include::{snippets}/getEventForAccount/http-request.adoc[]
+
+include::{snippets}/getEventForAccount/path-parameters.adoc[]
+
+.response
+include::{snippets}/getEventForAccount/http-response.adoc[]
+
+.response fields
+include::{snippets}/getEventForAccount/response-fields.adoc[]
+
+== Find Statistics for a given Account
+.request
+include::{snippets}/getStatisticsForAccount/http-request.adoc[]
+
+include::{snippets}/getStatisticsForAccount/path-parameters.adoc[]
+
+.response
+include::{snippets}/getStatisticsForAccount/http-response.adoc[]
+
+.response fields
+include::{snippets}/getStatisticsForAccount/response-fields.adoc[]
