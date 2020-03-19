@@ -38,5 +38,5 @@ environment).
 ## Endpoints
 Endpoint documentation is done by restdocs and asciidoc. To genereate these run
 `./gradlew clean test asciidoc`. Afterwards you need to run the application in your IDE, plug in
-your headphones of choice, open https://www.youtube.com/watch?v=1VQ_3sBZEm0 and start reading the
-endpoint documentation at http://localhost:8080/docs/index.html.
+your headphones of choice, open [https://www.youtube.com/watch?v=1VQ_3sBZEm0](this link) and start reading the
+endpoint documentation [http://localhost:8080/docs/index.html](provided with the application).
