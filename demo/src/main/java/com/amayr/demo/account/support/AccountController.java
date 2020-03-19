@@ -4,6 +4,7 @@ import com.amayr.demo.account.Account;
 import com.amayr.demo.event.Event;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,29 +18,29 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping
-    public ResponseEntity<?> findAll() {
-        return ResponseEntity.ok(accountService.findAll());
+    public ResponseEntity<?> findAllAccounts() {
+        return ResponseEntity.ok(accountService.findAllAccounts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") String id) {
-        return accountService.findById(id).map(ResponseEntity::ok)
+    public ResponseEntity<?> findAccountById(@PathVariable("id") String id) {
+        return accountService.findAccountById(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> insert(@Valid @RequestBody CreateAccountRequest account) {
-        return ResponseEntity.ok(accountService.insert(account.toAccount()));
+    public ResponseEntity<?> insertAccount(@Valid @RequestBody CreateAccountRequest account) {
+        return ResponseEntity.ok(accountService.insertAccount(account.toAccount()));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String id, @Valid @RequestBody UpdateAccountRequest account) {
-        return ResponseEntity.ok(accountService.update(account.toAccount(accountService.findAccountOrFail(id))));
+    public ResponseEntity<?> updateAccount(@PathVariable("id") String id, @Valid @RequestBody UpdateAccountRequest account) {
+        return ResponseEntity.ok(accountService.updateAccount(account.toAccount(accountService.findAccountOrFail(id))));
     }
 
     @PostMapping("/{id}/event")
     public ResponseEntity<?> insertEvent(@PathVariable("id") String accountId, @Valid @RequestBody CreateEventRequest eventRequest) {
-        return ResponseEntity.ok(accountService.addEvent(accountId, eventRequest.toEvent(accountId)));
+        return ResponseEntity.ok(accountService.addEventAndUpdateStatistics(accountId, eventRequest.toEvent(accountId)));
     }
 
     @GetMapping("/{id}/event")
@@ -47,8 +48,15 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getEventsForAccount(accountId));
     }
 
+    @GetMapping("/{id}/statistic")
+    public ResponseEntity<?> getStatisticsForAccount(@PathVariable("id") String accountId) {
+        return ResponseEntity.ok(accountService.findAccountOrFail(accountId).getStatistics());
+    }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Data
-    private static class CreateAccountRequest {
+    public static class CreateAccountRequest {
         @NotBlank
         private String name;
 
@@ -57,8 +65,10 @@ public class AccountController {
         }
     }
 
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Data
-    private static class UpdateAccountRequest {
+    public static class UpdateAccountRequest {
         @NotBlank
         private String name;
 
@@ -68,8 +78,10 @@ public class AccountController {
         }
     }
 
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Data
-    private static class CreateEventRequest {
+    public static class CreateEventRequest {
         @NotBlank
         private String type;
 
